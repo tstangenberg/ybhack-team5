@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel=icon href="favicon.png">
+    {%- block meta %}
+    {%- endblock %}
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="refresh" content="300">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+    <link rel="stylesheet" href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"
+  </head>
+  <body>
+    <section class="section section-header bg-gray">
+    <section class="grid-header container">
+    </section>
+    </section>
+
+    <div class="container">
+      <div class="columns">
+        <div class="column col-1 bg-secondary">
+        </div>
+        <div class="column col-10">
+          {%- block content %}
+          {%- endblock %}
+        </div>
+        <div class="column col-1"></div>
+      </div>
+    </div>
+    {{ m.script("https://code.jquery.com/jquery-3.4.1.min.js") }}
+    {{ m.script("cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js") }}
+    {%- block scripts %}
+    {%- endblock %}
+  </body>
+</html>
