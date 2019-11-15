@@ -58,6 +58,12 @@ kind: pipeline
 name: scraper
 
 steps:
+- name: compile
+  image: adoptopenjdk/maven-openjdk11
+  commands:
+    - cd insta-scrape
+    - mvn package
+
 - name: build
   image: plugins/docker
   settings:
