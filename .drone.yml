@@ -25,4 +25,3 @@ steps:
       from_secret: kubernetes_server_token
   commands:
     - kubectl apply -f frontend/deployment.yaml
-    - kubectl -n tools rollout status deploy/ybhack-deploy

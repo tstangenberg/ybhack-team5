@@ -31,5 +31,29 @@ def healthz():
     return {}, 200
 
 
+def create_index(es, index='fame1'):
+    settings = {
+        "settings": {
+            "number_of_shards": 3,
+            "number_of_replicas": 0
+        },
+        "mappings": {
+            "members": {
+                "dynamic": "strict",
+                "properties": {
+                    "name": {"type": "text"},
+                    "value": {"type": "integer"},
+                    "follower": {"type": "integer"},
+                    "fame": {"type": "integer"},
+                    "source": {"type": "text"},
+                }
+            }
+        }
+    }
+    try: es.indices.create(index=index_name, ignore=400, body=settings)
+    except: pass
+
+
 if __name__ == '__main__':
+    create_index(es)
     app.run(debug=False, host='0.0.0.0', threaded=True, use_reloader=True)
