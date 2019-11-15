@@ -16,7 +16,7 @@ function loadDataTable(id, data) {
     } );
 }
 
-function onLoad(event) {
+window.onload = function(event) {
+  onLoad(event);
   console.info('Javascript has been loaded ...');
 }
-

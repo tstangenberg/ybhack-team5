@@ -1,0 +1,15 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: ybhack-scraper
+  namespace: tools
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: ybhack
+            image: sybex/ybhack-scraper:0.${DRONE_BUILD_NUMBER}-beta
+          restartPolicy: Never
