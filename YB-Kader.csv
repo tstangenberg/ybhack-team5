@@ -1,42 +1,42 @@
-Rückennummer;Spielername;Position;Instagram
-1;Marco Wölfli;Torhüter;woelfli_1
-26;David von Ballmoos;Torhüter;davidvonballmoos
-40;Dario Marzino;Torhüter;dariomarzino
-3;Frederik Sörensen;Abwehr;frederiksorensen4
-4;Mohamed Ali Camara;Abwehr;camara_mhdali4
-5;Cédric Zesiger;Abwehr;zesiger5
-14;Nicolas Bürgy;Abwehr;nbuergy
-21;Ulisses Garcia;Abwehr;ulissesgarcia20
-23;Saidy Janko;Abwehr;saidyjanko22
-28;Fabian Lustenberger;Abwehr;lusti28
-29;Jordan Lotomba;Abwehr;j_lotomba
-6;Esteban Petignat;Mittelfeld;estebanpetignat6
-7;Marvin Spielmann;Mittelfeld;mspielmann33
-8;Vincent Sierro;Mittelfeld;vincent_sierro
-10;Miralem Sulejmani;Mittelfeld;sulejmani.fans
-11;Gianluca Gaudino;Mittelfeld;gaudino.gianluca
-13;Nicolas Moumi Ngamaleu;Mittelfeld;nm.ngamaleu13
-16;Christian Fassnacht;Mittelfeld;fassnacht16
-20;Michel Aebischer;Mittelfeld;michel.aebischer
-30;Sandro Lauper;Mittelfeld;sml.30
-35;Christopher Martins;Mittelfeld;chrismartins___
-17;Roger Assalé;Stürmer;rogerclaverassale
-18;Jean-Pierre Nsame;Stürmer;jean_pierre_nsame
-19;Felix Mambimbi;Stürmer;felixmambimbi
-99;Guillaume Hoarau;Stürmer;hoarauguillaume
--;Gerry Seoane;Trainer;gerry_seoane
--;Matteo Vanetta;Trainer;matteovanetta
--;Patrick Schnarwiler;Trainer;patrick_schnarwiler
--;Stefan Knutti;Trainer;s.knutti
--;Martin Fryand;Trainer;
--;Stephan Flückiger;Trainer;
--;Christoph Spycher;Staff;
--;Stéphane Chapuisat;Staff;
--;Frederic Stulens;Staff;
--;Kay van Steenkiste;Staff;
--;Amit Moshe Tzalach;Staff;
--;Nico Zaugg;Staff;
--;Jan Montagne;Staff;
--;Thomas Ringgenberg;Staff;
--;Jörg Dünkel;Staff;
--;Roberto Llano;Staff;
+Rückennummer;Spielername;Position;Instagram;Bild
+1;Marco Wölfli;Torhüter;woelfli_1;https://www.bscyb.ch/cgi-bin/spieler/126-spieler-20190710112905.jpg
+26;David von Ballmoos;Torhüter;davidvonballmoos;https://www.bscyb.ch/cgi-bin/spieler/245-spieler-20190710112855.jpg
+40;Dario Marzino;Torhüter;dariomarzino;https://www.bscyb.ch/cgi-bin/spieler/219-spieler-20190710112726.jpg
+3;Frederik Sörensen;Abwehr;frederiksorensen4;https://www.bscyb.ch/cgi-bin/spieler/314-spieler-20191113101359.jpg
+4;Mohamed Ali Camara;Abwehr;camara_mhdali4;https://www.bscyb.ch/cgi-bin/spieler/258-spieler-20190710112535.jpg
+5;Cédric Zesiger;Abwehr;zesiger5;https://www.bscyb.ch/cgi-bin/spieler/301-spieler-20190710112923.jpg
+14;Nicolas Bürgy;Abwehr;nbuergy;https://www.bscyb.ch/cgi-bin/spieler/297-spieler-20190710112523.jpg
+21;Ulisses Garcia;Abwehr;ulissesgarcia20;https://www.bscyb.ch/cgi-bin/spieler/257-spieler-20190710112554.jpg
+23;Saidy Janko;Abwehr;saidyjanko22;https://www.bscyb.ch/cgi-bin/spieler/302-spieler-20190710112624.jpg
+28;Fabian Lustenberger;Abwehr;lusti28;https://www.bscyb.ch/cgi-bin/spieler/290-spieler-20190710112703.jpg
+29;Jordan Lotomba;Abwehr;j_lotomba;https://www.bscyb.ch/cgi-bin/spieler/247-spieler-20190710112655.jpg
+6;Esteban Petignat;Mittelfeld;estebanpetignat6;https://www.bscyb.ch/cgi-bin/spieler/303-spieler-20190715160750.jpg
+7;Marvin Spielmann;Mittelfeld;mspielmann33;https://www.bscyb.ch/cgi-bin/spieler/291-spieler-20190710112819.jpg
+8;Vincent Sierro;Mittelfeld;vincent_sierro;https://www.bscyb.ch/cgi-bin/spieler/300-spieler-20190710112809.jpg
+10;Miralem Sulejmani;Mittelfeld;sulejmani.fans;https://www.bscyb.ch/cgi-bin/spieler/216-spieler-20190710112831.jpg
+11;Gianluca Gaudino;Mittelfeld;gaudino.gianluca;https://www.bscyb.ch/cgi-bin/spieler/288-spieler-20190710112604.jpg
+13;Nicolas Moumi Ngamaleu;Mittelfeld;nm.ngamaleu13;https://www.bscyb.ch/cgi-bin/spieler/249-spieler-20190710112739.jpg
+16;Christian Fassnacht;Mittelfeld;fassnacht16;https://www.bscyb.ch/cgi-bin/spieler/243-spieler-20190710112546.jpg
+20;Michel Aebischer;Mittelfeld;michel.aebischer;https://www.bscyb.ch/cgi-bin/spieler/241-spieler-20190710112340.jpg
+30;Sandro Lauper;Mittelfeld;sml.30;https://www.bscyb.ch/cgi-bin/spieler/253-spieler-20190710112645.jpg
+35;Christopher Martins;Mittelfeld;chrismartins___;https://www.bscyb.ch/cgi-bin/spieler/296-spieler-20190710112716.jpg
+17;Roger Assalé;Stürmer;rogerclaverassale;https://www.bscyb.ch/cgi-bin/spieler/242-spieler-20191113101544.jpg
+18;Jean-Pierre Nsame;Stürmer;jean_pierre_nsame;https://www.bscyb.ch/cgi-bin/spieler/248-spieler-20190710112752.jpg
+19;Felix Mambimbi;Stürmer;felixmambimbi;https://www.bscyb.ch/cgi-bin/spieler/304-spieler-20190715160846.jpg
+99;Guillaume Hoarau;Stürmer;hoarauguillaume;https://www.bscyb.ch/cgi-bin/spieler/213-spieler-20190710112615.jpg
+-;Gerry Seoane;Trainer;gerry_seoane;https://www.bscyb.ch/cgi-bin/spieler/254-spieler-20190807134037.jpg
+-;Matteo Vanetta;Trainer;matteovanetta;https://www.bscyb.ch/cgi-bin/spieler/255-spieler-20190710112308.jpg
+-;Patrick Schnarwiler;Trainer;patrick_schnarwiler;https://www.bscyb.ch/cgi-bin/spieler/295-spieler-20190710112332.jpg
+-;Stefan Knutti;Trainer;s.knutti;https://www.bscyb.ch/cgi-bin/spieler/230-spieler-20190710112240.jpg
+-;Martin Fryand;Trainer;;https://www.bscyb.ch/cgi-bin/spieler/26-spieler-20190710112141.jpg
+-;Stephan Flückiger;Trainer;;https://www.bscyb.ch/cgi-bin/spieler/224-spieler-20180906141045.jpg
+-;Christoph Spycher;Staff;;https://www.bscyb.ch/cgi-bin/spieler/92-spieler-20190710112210.jpg
+-;Stéphane Chapuisat;Staff;;https://www.bscyb.ch/cgi-bin/spieler/188-spieler-20190710112226.jpg
+-;Frederic Stulens;Staff;;https://www.bscyb.ch/cgi-bin/spieler/237-spieler-20190718133122.jpg
+-;Kay van Steenkiste;Staff;;https://www.bscyb.ch/cgi-bin/spieler/259-spieler-20190717163140.jpg
+-;Amit Moshe Tzalach;Staff;;https://www.bscyb.ch/cgi-bin/spieler/292-spieler-20190718130744.jpg
+-;Nico Zaugg;Staff;;https://www.bscyb.ch/cgi-bin/spieler/99-spieler-20180906141023.jpg
+-;Jan Montagne;Staff;;https://www.bscyb.ch/cgi-bin/spieler/87-spieler-20190718131905.jpg
+-;Thomas Ringgenberg;Staff;;https://www.bscyb.ch/cgi-bin/spieler/49-spieler-20190718132519.jpg
+-;Jörg Dünkel;Staff;;https://www.bscyb.ch/cgi-bin/spieler/294-spieler-20190717172610.jpg
+-;Roberto Llano;Staff;;https://www.bscyb.ch/cgi-bin/spieler/293-spieler-20190717162210.jpg
