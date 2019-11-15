@@ -1,5 +1,5 @@
 kind: pipeline
-name: ybhack-fame-calc
+name: frontend
 
 steps:
 - name: build
@@ -25,3 +25,31 @@ steps:
       from_secret: kubernetes_server_token
   commands:
     - kubectl apply -f frontend/deployment.yaml
+---
+kind: pipeline
+name: crawler
+
+steps:
+- name: build
+  image: plugins/docker
+  settings:
+    repo: sybex/ybhack-frontend
+    cache_from: sybex/ybhack-crawler
+    tags:
+      - latest
+      - 0.${DRONE_BUILD_NUMBER}-beta
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    dockerfile: crawler/Dockerfile
+
+- name: deploy
+  image: sybex/drone-kubectl
+  settings:
+    kubernetes_server:
+      from_secret: kubernetes_server_url
+    kubernetes_token:
+      from_secret: kubernetes_server_token
+  commands:
+    - kubectl apply -f crawler/deployment.yaml
