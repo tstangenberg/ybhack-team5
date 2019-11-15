@@ -34,6 +34,7 @@ steps:
   image: plugins/docker
   settings:
     repo: sybex/ybhack-crawler
+    cache_from: sybex/ybhack-crawler
     tags:
       - latest
       - 0.${DRONE_BUILD_NUMBER}-beta
@@ -52,3 +53,30 @@ steps:
       from_secret: kubernetes_server_token
   commands:
     - kubectl apply -f crawler/deployment.yaml
+---
+kind: pipeline
+name: scraper
+
+steps:
+- name: build
+  image: plugins/docker
+  settings:
+    repo: sybex/ybhack-scraper
+    tags:
+      - latest
+      - 0.${DRONE_BUILD_NUMBER}-beta
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    dockerfile: insta-scrape/Dockerfile
+
+- name: deploy
+  image: sybex/drone-kubectl
+  settings:
+    kubernetes_server:
+      from_secret: kubernetes_server_url
+    kubernetes_token:
+      from_secret: kubernetes_server_token
+  commands:
+    - kubectl apply -f insta-scrape/cronjob.yaml
