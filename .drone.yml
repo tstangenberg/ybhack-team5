@@ -78,12 +78,12 @@ steps:
       from_secret: docker_password
     dockerfile: insta-scrape/Dockerfile
 
-- name: deploy
-  image: sybex/drone-kubectl
-  settings:
-    kubernetes_server:
-      from_secret: kubernetes_server_url
-    kubernetes_token:
-      from_secret: kubernetes_server_token
-  commands:
-    - kubectl apply -f insta-scrape/cronjob.yaml
+#- name: deploy
+#  image: sybex/drone-kubectl
+#  settings:
+#    kubernetes_server:
+#      from_secret: kubernetes_server_url
+#    kubernetes_token:
+#      from_secret: kubernetes_server_token
+#  commands:
+#    - kubectl apply -f insta-scrape/cronjob.yaml
