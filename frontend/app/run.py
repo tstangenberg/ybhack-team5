@@ -38,7 +38,8 @@ def calcFame(array):
     dataset = []
     for player in array:
         count = searchPlayer(player["name"])
-        array = [player["name"], player["follower"], player["posts"], count]
+        fame = int((count+1) * (player["follower"]+1) * (player["posts"]+1) / 10000)
+        array = [player["name"], player["follower"], player["posts"], count, fame]
         dataset.append(array)
     return dataset
 

@@ -2,12 +2,13 @@ function loadDataTable(id, data) {
     $(document).ready(function() {
         var table = $('#' + id).DataTable( {
             data: data,
-            "order": [[ 3, "desc" ]],
+            "order": [[ 4, "desc" ]],
             "pageLength": 15,
             columns: [
                 { title: "Spieler" },
                 { title: "Follower" },
                 { title: "Posts" },
+                { title: "Tweets" },
                 { title: "Fame" } ]
         } );
     } );
