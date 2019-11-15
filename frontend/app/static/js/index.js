@@ -2,6 +2,8 @@ function loadDataTable(id, data) {
     $(document).ready(function() {
         var table = $('#' + id).DataTable( {
             data: data,
+	    "pageLength": 15,
+	    "lengthChange": false,
             "order": [[ 4, "desc" ]],
             "pageLength": 15,
             columns: [
