@@ -33,7 +33,7 @@ def healthz():
     return {}, 200
 
 
-def create_index(es, index='fame1'):
+def create_index(es, index_name='fame1'):
     settings = {
         "settings": {
             "number_of_shards": 3,
@@ -52,8 +52,10 @@ def create_index(es, index='fame1'):
             }
         }
     }
-    try: es.indices.create(index=index_name, ignore=400, body=settings)
-    except: pass
+    try: 
+        es.indices.create(index=index_name, ignore=400, body=settings)
+    except: 
+        pass
 
 
 if __name__ == '__main__':
