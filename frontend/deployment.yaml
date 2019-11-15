@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: ybhack
-        image: sybex/ybhack-frontend
+        image: sybex/ybhack-frontend:0.${DRONE_BUILD_NUMBER}
         imagePullPolicy: Always
         env:
         - name: ELASTIC_USER

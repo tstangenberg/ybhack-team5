@@ -9,6 +9,7 @@ steps:
     cache_from: sybex/ybhack-frontend
     tags:
       - latest
+      - 0.${DRONE_BUILD_NUMBER}
     username:
       from_secret: docker_username
     password:
@@ -24,3 +25,4 @@ steps:
       from_secret: kubernetes_server_token
   commands:
     - kubectl apply -f frontend/deployment.yaml
+    - kubectl -n tools rollout status deploy/ybhack-deploy
