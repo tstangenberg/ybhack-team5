@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ybhack-crawler-deploy
+  namespace: tools
+spec:
+  selector:
+    matchLabels:
+      app: ybhack-crawler
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ybhack-crawler
+    spec:
+      containers:
+      - name: ybhack
+        image: sybex/ybhack-crawler:0.${DRONE_BUILD_NUMBER}-beta
+        imagePullPolicy: Always
+        env:
+        - name: ELASTIC_USER
+          valueFrom:
+            secretKeyRef:
+              name: ybhack-secret
+              key: user
+        - name: ELASTIC_PASS
+          valueFrom:
+            secretKeyRef:
+              name: ybhack-secret
+              key: pass
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1000Mi
+          requests:
+            cpu: 100m
+            memory: 10Mi

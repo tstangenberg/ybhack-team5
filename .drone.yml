@@ -33,8 +33,7 @@ steps:
 - name: build
   image: plugins/docker
   settings:
-    repo: sybex/ybhack-frontend
-    cache_from: sybex/ybhack-crawler
+    repo: sybex/ybhack-crawler
     tags:
       - latest
       - 0.${DRONE_BUILD_NUMBER}-beta
