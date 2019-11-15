@@ -7,7 +7,6 @@ import sys
 import datetime
 from flask import Flask, render_template
 from elasticsearch import Elasticsearch
-from elasticsearch_dsl import Search
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO,
                     format="%(asctime)s %(levelname)-5s: %(message)s")
@@ -25,9 +24,7 @@ except Exception:
 
 @app.route("/", methods=['GET'])
 def root():
-    items = [["Spieler 1", "1 Mio.", "2", "0"],
-             ["Spieler 2", "1 Mio.", "2", "2"],
-             ["Spieler 3", "1 Mio.", "2", "5"]]
+    items = example_data()
     return render_template("index.jinja", info=es.info(), items=items)
 
 
@@ -79,12 +76,17 @@ def example_data():
 
     res1 = es.search(index="twitter", body={"query": {"match_all": {}}})
 
-    res2 = es.search(index="twitter", body={'query': {'match': {'name': 'DanielStrohecker', }}})
+    res2 = es.search(index="twitter", body={'query': {'match': {'name': 'DanielStrohecker', }}}, size=10000)
 
     print(res1["hits"]["total"]["value"])
-    print(res2)
+    dataset = []
+    for result in res2["hits"]["hits"]:
+        array = [result["_source"]["name"], result["_source"]["text"], result["_source"]["datetime"], 0]
+        print(array)
+        dataset.append(array)
+    return dataset
+
 
 if __name__ == '__main__':
     create_indexes()
-    example_data()
     app.run(debug=False, host='0.0.0.0', threaded=True, use_reloader=True)
