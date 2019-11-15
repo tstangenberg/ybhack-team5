@@ -54,7 +54,7 @@ def create_index(es, index_name='fame1'):
     }
     try: 
         es.indices.create(index=index_name, ignore=400, body=settings)
-    except: 
+    except Exception as err: 
         pass
 
 
