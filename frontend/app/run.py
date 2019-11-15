@@ -25,8 +25,9 @@ except Exception:
 @app.route("/", methods=['GET'])
 def root():
     count, array = getPlayerList()
-    items = calcFame(array)
-    return render_template("index.jinja", info=es.info(), items=items, count=countData())
+    htmlTable = calcFame(array)
+    return render_template("index.jinja", table=htmlTable, 
+                                          count=countData())
 
 
 @app.route("/healthz", methods=['GET'])
@@ -39,9 +40,48 @@ def calcFame(array):
     for player in array:
         count = searchPlayer(player["name"])
         fame = int((count+1) * (player["follower"]+1) * (player["posts"]+1) / 10000)
-        array = [player["name"], player["follower"], player["posts"], count, fame]
-        dataset.append(array)
-    return dataset
+        player["fame"] = fame
+        player["count"] = count
+        dataset.append(player)
+    return createHtmlTable(dataset)
+
+
+def createHtmlTable(dataset):
+    htmlTable='<table class="table table-hover text-center" id="datatable-ybhack">'
+    htmlTable+="""
+               <thead>
+                 <tr>
+                   <th>Trend</th>
+                   <th>Spieler</th>
+                   <th>Follower</th>
+                   <th>Posts</th>
+                   <th>Tweets</th>
+                   <th>Fame</th>
+                 </tr>
+               </thead>
+               <tbody>
+               """
+    for player in dataset:
+        if player["fame"] > 10000: icon = '<span class="label label-success"><i class="icon icon-upward"></i></span>'
+        elif player["fame"] > 1000: icon = '<span class="label label-warning"><i class="icon icon-forward"></i></span>'
+        else: icon = '<span class="label label-error"><i class="icon icon-downward"></i></span>'
+        htmlTable+="""
+                   <tr>
+                     <td>%s</td>
+                     <td>%s</td>
+                     <td>%s</td>
+                     <td>%s</td>
+                     <td>%s</td>
+                     <td>%s</td>
+                   </tr>
+                   """ % (icon,
+                          player["name"], 
+                          player["follower"], 
+                          player["posts"], 
+                          player["count"], 
+                          player["fame"])
+    htmlTable += "</tbody></table>"
+    return htmlTable
 
 
 def create_indexes():
@@ -74,6 +114,20 @@ def create_indexes():
         }
     }
     es.indices.create(index="insta", ignore=400, body=settings)
+    settings = {
+        "settings": {
+            "number_of_shards": 3,
+            "number_of_replicas": 0
+        },
+        "mappings": {
+            "properties": {
+                "name": {"type": "text", "fields": {"keyword": {"type": "keyword"}}},
+                "likes": {"type": "integer"},
+                "follower": {"type": "integer"},
+            }
+        }
+    }
+    es.indices.create(index="facebook", ignore=400, body=settings)
 
 
 def getPlayerList():

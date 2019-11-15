@@ -1,17 +1,17 @@
-function loadDataTable(id, data) {
+function loadDataTable(id) {
     $(document).ready(function() {
         var table = $('#' + id).DataTable( {
-            data: data,
+            //data: data,
 	    "pageLength": 15,
 	    "lengthChange": false,
-            "order": [[ 4, "desc" ]],
-            "pageLength": 15,
-            columns: [
-                { title: "Spieler" },
-                { title: "Follower" },
-                { title: "Posts" },
-                { title: "Tweets" },
-                { title: "Fame" } ]
+            "order": [[ 5, "desc" ]],
+            "pageLength": 15//,
+            //columns: [
+            //    { title: "Spieler" },
+            //    { title: "Follower" },
+            //    { title: "Posts" },
+            //    { title: "Tweets" },
+            //    { title: "Fame" } ]
         } );
     } );
 }
