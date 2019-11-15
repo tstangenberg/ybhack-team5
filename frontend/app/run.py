@@ -6,6 +6,7 @@ import os
 import sys
 from flask import Flask, render_template
 from elasticsearch import Elasticsearch
+from ssl import create_default_context
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO,
                     format="%(asctime)s %(levelname)-5s: %(message)s")
