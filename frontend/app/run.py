@@ -85,7 +85,7 @@ def getPlayerList():
     #es.index(index="insta", body=e1)
 
     # search data
-    res = es.search(index="insta", body={"query": {"match_all": {}}})
+    res = es.search(index="insta", body={"query": {"match_all": {}}}, size=50)
     count = res["hits"]["total"]["value"]
     dataset = []
     for result in res["hits"]["hits"]:
@@ -108,11 +108,6 @@ def searchPlayer(player):
     res = es.search(index="twitter", body={'query': {'match': {'name': player }}}, size=10000)
 
     count = res["hits"]["total"]["value"]
-    # dataset = []
-    # for result in res["hits"]["hits"]:
-    #     array = [result["_source"]["name"], result["_source"]["text"], result["_source"]["datetime"], 0]
-    #     print(array)
-    #     dataset.append(array)
     return count
 
 

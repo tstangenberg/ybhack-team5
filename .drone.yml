@@ -9,7 +9,7 @@ steps:
     cache_from: sybex/ybhack-frontend
     tags:
       - latest
-      - 0.${DRONE_BUILD_NUMBER}
+      - 0.${DRONE_BUILD_NUMBER}-beta
     username:
       from_secret: docker_username
     password:
