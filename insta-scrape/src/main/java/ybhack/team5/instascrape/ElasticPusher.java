@@ -2,14 +2,26 @@ package ybhack.team5.instascrape;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import kong.unirest.HttpRequestWithBody;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import lombok.extern.java.Log;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 @Log
 public class ElasticPusher {
+
+    @Value("${elasticsearch.username}")
+    private String elasticUser;
+
+    @Value("${elasticsearch.password}")
+    private String elasticPass;
+
+    @Value("${elasticsearch.url}")
+    private String elasticUrl;
+
     public void pushToElasticSearch(String id, InstagramFame fame) {
         if(fame != null) {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -17,8 +29,16 @@ public class ElasticPusher {
             try {
                 json = objectMapper.writeValueAsString(fame);
                 log.info("updating " + id);
-                HttpResponse httpResponse = Unirest
-                        .post("https://dreng:mobi123@elastic.dreng.ch/insta/_doc/{id}")
+                HttpRequestWithBody post = Unirest
+                        .post(elasticUrl);
+                if (!elasticUser.isEmpty()) {
+                    post = post.routeParam("user", elasticUser);
+                }
+                if (!elasticPass.isEmpty()) {
+                    post = post.routeParam("pass", elasticPass);
+                }
+
+                HttpResponse httpResponse = post
                         .routeParam("id", id)
                         .header("Content-Type", "application/json")
                         .body(json)
