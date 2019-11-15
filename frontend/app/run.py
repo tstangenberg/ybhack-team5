@@ -13,7 +13,9 @@ app = Flask(__name__)
 
 username = os.environ['ELASTIC_USER']
 password = os.environ['ELASTIC_PASS']
-es = Elasticsearch("https://elastic.dreng.ch", http_auth=(username, password))
+es = Elasticsearch("https://elastic.dreng.ch", 
+                    http_auth=(username, password),
+                    scheme="https", port=443)
 
 
 @app.route("/", methods=['GET'])
