@@ -4,13 +4,10 @@ function loadDataTable(id, data) {
             data: data,
             "pageLength": 15,
             columns: [
-                { title: "Namespace" },
-                { title: "Creation" },
-                { title: "Admin" },
-                { title: "AD group" },
-                { title: "Size" },
-                { title: "State" },
-                { title: "PullSecret" } ]
+                { title: "Spiele" },
+                { title: "Marktwert" },
+                { title: "Follower" },
+                { title: "Fame" } ]
         } );
     } );
 }
