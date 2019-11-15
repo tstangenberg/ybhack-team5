@@ -19,23 +19,23 @@ try:
                        http_auth=(username, password),
                        scheme="https", port=443)
 except Exception:
+    print("using kubernetes service connection to elastic!")
     es = Elasticsearch("elasticsearch-master.efk:9200")
 
 
-def tweet_to_json(tweet,searchterm):
+def tweet_to_elastic(tweet, searchterm):
     tweet_dict = {
         "name": searchterm,
-        "timestamp":tweet.created_at,
+        "timestamp": tweet.created_at,
         "text": tweet.text        
-        }
-    print (json.dumps(tweet_dict,default=str))
-    es.index(index ="twitter",body = tweet_dict)
+    }
+    print(tweet_dict)
+    es.index(index="twitter", body=tweet_dict)
 
 
 # Authenticate to Twitter
 auth = tweepy.OAuthHandler("KIC5tWGui7OmtN7dXGN0OhoyH", "DfD9AZ0jgURl5BrG3CSJzDZ8yudcIYcVNCbADSyp3zX2fv3aBU")
 auth.set_access_token("1194257145665146880-Zui8N38nyf2adf3O0CSfXS0WOwWQFU", "kqqIDd6YWz4ekQkwAHseQAjds5KQ2vAGQAzGuDXw1NiTV")
-
 api = tweepy.API(auth)
 
 class MyStreamListener(tweepy.StreamListener):
@@ -46,10 +46,11 @@ class MyStreamListener(tweepy.StreamListener):
     def on_status(self, tweet):
             for player in player_list:
                 if player in tweet.text:
-                    tweet_to_json(tweet,player)
+                    tweet_to_elastic(tweet, player)
                 
     def on_error(self, status):
         print("Error detected")
+
 
 tweets_listener = MyStreamListener(api)
 stream = tweepy.Stream(api.auth, tweets_listener)
