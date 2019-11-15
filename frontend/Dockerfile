@@ -3,7 +3,7 @@ LABEL maintainer="Daniel S."
 
 ENV PYTHONPATH=/app
 
-RUN apk --no-cache add python3 py3-cryptography \
+RUN apk --no-cache add ca-certificates python3 py3-cryptography \
     && pip3 install --upgrade pip \
     && pip3 install flask elasticsearch flake8 --no-cache-dir \
     && adduser -D web
