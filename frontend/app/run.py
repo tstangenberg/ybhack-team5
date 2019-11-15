@@ -7,6 +7,8 @@ import sys
 import datetime
 from flask import Flask, render_template
 from elasticsearch import Elasticsearch
+from elasticsearch_dsl import A
+from elasticsearch_dsl.search import Search
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO,
                     format="%(asctime)s %(levelname)-5s: %(message)s")
@@ -24,7 +26,7 @@ except Exception:
 
 @app.route("/", methods=['GET'])
 def root():
-    items = example_data()
+    count, items = getPlayerList()
     return render_template("index.jinja", info=es.info(), items=items)
 
 
@@ -55,7 +57,7 @@ def create_indexes():
         },
         "mappings": {
             "properties": {
-                "name": {"type": "text"},
+                "name": {"type": "text", "fields": {"keyword": {"type": "keyword"}}},
                 "follower": {"type": "integer"},
                 "posts": {"type": "integer"},
                 "datetime": {"type": "date"},
@@ -65,28 +67,45 @@ def create_indexes():
     es.indices.create(index="insta", ignore=400, body=settings)
 
 
-def example_data():
-    # Add data
-    e1 = { "name":"DanielStrohecker",
-           "text": "Challenge to challenge the ...",
+def getPlayerList():
+    # Example data
+    e1 = { "name":"Daniel Strohecker",
+           "follower": 78,
+           "posts": 23,
            "datetime": datetime.datetime.utcnow() }
-    es.index(index='twitter', body=e1)
+    #es.index(index="insta", body=e1)
 
     # search data
-
-    res1 = es.search(index="twitter", body={"query": {"match_all": {}}})
-
-    res2 = es.search(index="twitter", body={'query': {'match': {'name': 'DanielStrohecker', }}}, size=10000)
-
-    print(res1["hits"]["total"]["value"])
+    res = es.search(index="insta", body={"query": {"match_all": {}}})
+    count = res["hits"]["total"]["value"]
     dataset = []
-    for result in res2["hits"]["hits"]:
+    for result in res["hits"]["hits"]:
+        array = [result["_source"]["name"], result["_source"]["follower"], result["_source"]["posts"], 0]
+        print(array)
+        dataset.append(array)
+    return count, dataset
+
+
+def searchPlayer(player):
+    # Example data
+    e1 = { "name":"Daniel Strohecker",
+           "text": "Challenge to challenge the ...",
+           "datetime": datetime.datetime.utcnow() }
+    #es.index(index='twitter', body=e1)
+
+    # search data
+    res = es.search(index="twitter", body={'query': {'match': {'name': player, }}}, size=10000)
+
+    count = res["hits"]["total"]["value"]
+    dataset = []
+    for result in res["hits"]["hits"]:
         array = [result["_source"]["name"], result["_source"]["text"], result["_source"]["datetime"], 0]
         print(array)
         dataset.append(array)
-    return dataset
+    return count, dataset
 
 
 if __name__ == '__main__':
     create_indexes()
+    getPlayerList()
     app.run(debug=False, host='0.0.0.0', threaded=True, use_reloader=True)
