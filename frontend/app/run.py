@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import logging
@@ -24,13 +24,23 @@ except Exception:
 
 @app.route("/", methods=['GET'])
 def root():
-    count, items = getPlayerList()
-    return render_template("index.jinja", info=es.info(), items=items)
+    count, array = getPlayerList()
+    items = calcFame(array)
+    return render_template("index.jinja", info=es.info(), items=items, count=countData())
 
 
 @app.route("/healthz", methods=['GET'])
 def healthz():
     return {}, 200
+
+
+def calcFame(array):
+    dataset = []
+    for player in array:
+        count = searchPlayer(player["name"])
+        array = [player["name"], player["follower"], player["posts"], count]
+        dataset.append(array)
+    return dataset
 
 
 def create_indexes():
@@ -78,7 +88,9 @@ def getPlayerList():
     count = res["hits"]["total"]["value"]
     dataset = []
     for result in res["hits"]["hits"]:
-        array = [result["_source"]["name"], result["_source"]["follower"], result["_source"]["posts"], 0]
+        array = {"name": result["_source"]["name"], 
+                 "follower": result["_source"]["follower"], 
+                 "posts": result["_source"]["posts"]}
         print(array)
         dataset.append(array)
     return count, dataset
@@ -92,15 +104,15 @@ def searchPlayer(player):
     #es.index(index='twitter', body=e1)
 
     # search data
-    res = es.search(index="twitter", body={'query': {'match': {'name': player, }}}, size=10000)
+    res = es.search(index="twitter", body={'query': {'match': {'name': player }}}, size=10000)
 
     count = res["hits"]["total"]["value"]
-    dataset = []
-    for result in res["hits"]["hits"]:
-        array = [result["_source"]["name"], result["_source"]["text"], result["_source"]["datetime"], 0]
-        print(array)
-        dataset.append(array)
-    return count, dataset
+    # dataset = []
+    # for result in res["hits"]["hits"]:
+    #     array = [result["_source"]["name"], result["_source"]["text"], result["_source"]["datetime"], 0]
+    #     print(array)
+    #     dataset.append(array)
+    return count
 
 
 def countData():
@@ -109,6 +121,4 @@ def countData():
 
 if __name__ == '__main__':
     create_indexes()
-    getPlayerList()
-    print(countData())
     app.run(debug=False, host='0.0.0.0', threaded=True, use_reloader=True)
