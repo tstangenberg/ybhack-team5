@@ -6,7 +6,6 @@ import os
 import sys
 from flask import Flask, render_template
 from elasticsearch import Elasticsearch
-# from ssl import create_default_context
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO,
                     format="%(asctime)s %(levelname)-5s: %(message)s")
@@ -14,11 +13,12 @@ app = Flask(__name__)
 
 username = os.environ['ELASTIC_USER']
 password = os.environ['ELASTIC_PASS']
-# context=create_default_context(capath="/usr/share/ca-certificates/mozilla/")
-# es = Elasticsearch("https://elastic.dreng.ch",
-#                    http_auth=(username, password), verify_certs=False,
-#                    scheme="https", port=443, ssl_context=context)
-es = Elasticsearch("elasticsearch-master.efk:9200")
+try:
+    es = Elasticsearch("https://elastic.dreng.ch",
+                       http_auth=(username, password),
+                       scheme="https", port=443)
+except:
+    es = Elasticsearch("elasticsearch-master.efk:9200")
 
 
 @app.route("/", methods=['GET'])
@@ -53,10 +53,7 @@ def create_index(es, index_name='fame1'):
             }
         }
     }
-    try:
-        es.indices.create(index=index_name, ignore=400, body=settings)
-    except Exception as err:
-        print(err)
+    es.indices.create(index=index_name, ignore=400, body=settings)
 
 
 if __name__ == '__main__':
