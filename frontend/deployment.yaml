@@ -36,6 +36,11 @@ spec:
         image: sybex/ybhack-frontend
         imagePullPolicy: Always
         env:
+        - name: ELASTIC_USER
+          valueFrom:
+            secretKeyRef:
+              name: ybhack-secret
+              key: user
         - name: ELASTIC_PASS
           valueFrom:
             secretKeyRef:
