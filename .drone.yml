@@ -6,6 +6,7 @@ steps:
   image: plugins/docker
   settings:
     repo: sybex/ybhack-frontend
+    cache_from: sybex/ybhack-frontend
     tags:
       - latest
     username:

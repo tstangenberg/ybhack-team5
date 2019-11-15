@@ -8,7 +8,7 @@ RUN apk --no-cache add python3 py3-cryptography \
     && pip3 install flask elasticsearch flake8 --no-cache-dir \
     && adduser -D web
 
-COPY frontent/app /app
+COPY frontend/app /app
 RUN chown -R web /app/ \
     && flake8 /app/run.py \
     && python3 -m compileall /app/*.py
