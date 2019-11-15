@@ -14,10 +14,11 @@ app = Flask(__name__)
 
 username = os.environ['ELASTIC_USER']
 password = os.environ['ELASTIC_PASS']
-context = create_default_context(capath="/usr/share/ca-certificates/mozilla/")
-es = Elasticsearch("https://elastic.dreng.ch",
-                   http_auth=(username, password), verify_certs=False,
-                   scheme="https", port=443, ssl_context=context)
+#context = create_default_context(capath="/usr/share/ca-certificates/mozilla/")
+#es = Elasticsearch("https://elastic.dreng.ch",
+#                   http_auth=(username, password), verify_certs=False,
+#                   scheme="https", port=443, ssl_context=context)
+es = Elasticsearch("elasticsearch-master.efk:9200")
 
 
 @app.route("/", methods=['GET'])
