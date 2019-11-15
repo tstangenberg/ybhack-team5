@@ -24,8 +24,6 @@ spec:
     matchLabels:
       app: ybhack
   replicas: 1
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
