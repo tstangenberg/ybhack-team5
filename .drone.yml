@@ -68,6 +68,7 @@ steps:
   image: plugins/docker
   settings:
     repo: sybex/ybhack-scraper
+    cache_from: sybex/ybhack-scraper
     tags:
       - latest
       - 0.${DRONE_BUILD_NUMBER}-beta

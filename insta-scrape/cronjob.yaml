@@ -1,7 +1,8 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: scraper
+  name: ybhack-scraper
+  namespace: tools
 spec:
   schedule: "*/5 * * * *"
   jobTemplate:
