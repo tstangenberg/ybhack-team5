@@ -52,10 +52,10 @@ def create_index(es, index_name='fame1'):
             }
         }
     }
-    try: 
+    try:
         es.indices.create(index=index_name, ignore=400, body=settings)
-    except Exception as err: 
-        pass
+    except Exception as err:
+        print(err)
 
 
 if __name__ == '__main__':
