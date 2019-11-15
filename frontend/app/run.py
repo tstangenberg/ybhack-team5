@@ -7,8 +7,6 @@ import sys
 import datetime
 from flask import Flask, render_template
 from elasticsearch import Elasticsearch
-from elasticsearch_dsl import A
-from elasticsearch_dsl.search import Search
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO,
                     format="%(asctime)s %(levelname)-5s: %(message)s")
@@ -105,7 +103,12 @@ def searchPlayer(player):
     return count, dataset
 
 
+def countData():
+    res = es.search(index="twitter", body={"query": {"match_all": {}}})
+    return res["hits"]["total"]["value"]
+
 if __name__ == '__main__':
     create_indexes()
     getPlayerList()
+    print(countData())
     app.run(debug=False, host='0.0.0.0', threaded=True, use_reloader=True)
