@@ -13,13 +13,13 @@ import org.springframework.stereotype.Component;
 @Log
 public class ElasticPusher {
 
-    @Value("${elasticsearch.username}")
+    @Value("${ELASTIC_USER}")
     private String elasticUser;
 
-    @Value("${elasticsearch.password}")
+    @Value("${ELASTIC_PASS}")
     private String elasticPass;
 
-    @Value("${elasticsearch.url}")
+    @Value("${ELASTIC_URL}")
     private String elasticUrl;
 
     public void pushToElasticSearch(String id, InstagramFame fame) {
