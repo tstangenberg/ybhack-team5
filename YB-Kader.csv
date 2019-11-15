@@ -1,42 +1,42 @@
-Rückennummer;Spielername;Position
-1;Marco Wölfli;Torhüter
-26;David von Ballmoos;Torhüter
-40;Dario Marzino;Torhüter
-3;Frederik Sörensen;Abwehr
-4;Mohamed Ali Camara;Abwehr
-5;Cédric Zesiger;Abwehr
-14;Nicolas Bürgy;Abwehr
-21;Ulisses Garcia;Abwehr
-23;Saidy Janko;Abwehr
-28;Fabian Lustenberger;Abwehr
-29;Jordan Lotomba;Abwehr
-6;Esteban Petignat;Mittelfeld
-7;Marvin Spielmann;Mittelfeld
-8;Vincent Sierro;Mittelfeld
-10;Miralem Sulejmani;Mittelfeld
-11;Gianluca Gaudino;Mittelfeld
-13;Nicolas Moumi Ngamaleu;Mittelfeld
-16;Christian Fassnacht;Mittelfeld
-20;Michel Aebischer;Mittelfeld
-30;Sandro Lauper;Mittelfeld
-35;Christopher Martins;Mittelfeld
-17;Roger Assalé;Stürmer
-18;Jean-Pierre Nsame;Stürmer
-19;Felix Mambimbi;Stürmer
-99;Guillaume Hoarau;Stürmer
--;Gerry Seoane;Trainer
--;Matteo Vanetta;Trainer
--;Patrick Schnarwiler;Trainer
--;Stefan Knutti;Trainer
--;Martin Fryand;Trainer
--;Stephan Flückiger;Trainer
--;Christoph Spycher;Staff
--;Stéphane Chapuisat;Staff
--;Frederic Stulens;Staff
--;Kay van Steenkiste;Staff
--;Amit Moshe Tzalach;Staff
--;Nico Zaugg;Staff
--;Jan Montagne;Staff
--;Thomas Ringgenberg;Staff
--;Jörg Dünkel;Staff
--;Roberto Llano;Staff
+Rückennummer;Spielername;Position;Instagram
+1;Marco Wölfli;Torhüter;woelfli_1
+26;David von Ballmoos;Torhüter;davidvonballmoos
+40;Dario Marzino;Torhüter;dariomarzino
+3;Frederik Sörensen;Abwehr;frederiksorensen4
+4;Mohamed Ali Camara;Abwehr;camara_mhdali4
+5;Cédric Zesiger;Abwehr;zesiger5
+14;Nicolas Bürgy;Abwehr;nbuergy
+21;Ulisses Garcia;Abwehr;ulissesgarcia20
+23;Saidy Janko;Abwehr;saidyjanko22
+28;Fabian Lustenberger;Abwehr;lusti28
+29;Jordan Lotomba;Abwehr;j_lotomba
+6;Esteban Petignat;Mittelfeld;estebanpetignat6
+7;Marvin Spielmann;Mittelfeld;mspielmann33
+8;Vincent Sierro;Mittelfeld;vincent_sierro
+10;Miralem Sulejmani;Mittelfeld;sulejmani.fans
+11;Gianluca Gaudino;Mittelfeld;gaudino.gianluca
+13;Nicolas Moumi Ngamaleu;Mittelfeld;nm.ngamaleu13
+16;Christian Fassnacht;Mittelfeld;fassnacht16
+20;Michel Aebischer;Mittelfeld;michel.aebischer
+30;Sandro Lauper;Mittelfeld;sml.30
+35;Christopher Martins;Mittelfeld;chrismartins___
+17;Roger Assalé;Stürmer;rogerclaverassale
+18;Jean-Pierre Nsame;Stürmer;jean_pierre_nsame
+19;Felix Mambimbi;Stürmer;felixmambimbi
+99;Guillaume Hoarau;Stürmer;hoarauguillaume
+-;Gerry Seoane;Trainer;gerry_seoane
+-;Matteo Vanetta;Trainer;matteovanetta
+-;Patrick Schnarwiler;Trainer;patrick_schnarwiler
+-;Stefan Knutti;Trainer;s.knutti
+-;Martin Fryand;Trainer;
+-;Stephan Flückiger;Trainer;
+-;Christoph Spycher;Staff;
+-;Stéphane Chapuisat;Staff;
+-;Frederic Stulens;Staff;
+-;Kay van Steenkiste;Staff;
+-;Amit Moshe Tzalach;Staff;
+-;Nico Zaugg;Staff;
+-;Jan Montagne;Staff;
+-;Thomas Ringgenberg;Staff;
+-;Jörg Dünkel;Staff;
+-;Roberto Llano;Staff;
