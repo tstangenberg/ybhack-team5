@@ -2,11 +2,15 @@ function loadDataTable(id, data) {
     $(document).ready(function() {
         var table = $('#' + id).DataTable( {
             data: data,
+	    "pageLength": 15,
+	    "lengthChange": false,
+            "order": [[ 4, "desc" ]],
             "pageLength": 15,
             columns: [
-                { title: "Spiele" },
-                { title: "Marktwert" },
+                { title: "Spieler" },
                 { title: "Follower" },
+                { title: "Posts" },
+                { title: "Tweets" },
                 { title: "Fame" } ]
         } );
     } );
