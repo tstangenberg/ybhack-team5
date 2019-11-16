@@ -2,6 +2,7 @@ import re
 import tweepy 
 import os
 import sys
+import time
 import logging
 from tweepy import OAuthHandler 
 from textblob import TextBlob 
@@ -57,7 +58,9 @@ class MyStreamListener(tweepy.StreamListener):
                                     es.index(index ="twitter",body = tweet_dict_new)
 
         def on_error(self, status):
-            logging.error("Error detected")
+            if status == 420:
+                logging.error("Error 420 detected")
+            time.sleep(60)
             sys.exit(1)
                                
      
