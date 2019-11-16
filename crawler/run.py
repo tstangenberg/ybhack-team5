@@ -7,6 +7,9 @@ from tweepy import OAuthHandler
 from textblob import TextBlob 
 from elasticsearch import Elasticsearch
 
+logging.basicConfig(stream=sys.stdout, level=logging.INFO,
+                    format="%(asctime)s %(levelname)-5s: %(message)s")
+
 # elasticsearch
 username = os.environ['ELASTIC_USER']
 password = os.environ['ELASTIC_PASS']
@@ -72,8 +75,9 @@ spieler_yb = ['Marco','Wölfli','David', 'vonBallmoos','Dario', 'Marzino',
            'Michel', 'Aebischer','Sandro', 'Lauper','Christopher' ,'Martins','Roger' 'Assalé','Jean-Pierre', 'Nsame',
            'Felix' ,'Mambimbi','Guillaume', 'Hoarau']
     
-yb = ['bsc_yb','BSC_YB','YB','Young_boys','BSC Young Boys','ybforever','ybfans','fussball','swisssuperleague','football','soccer','futbol']                  
-     
+yb = ['bsc_yb','BSC_YB','YB','Young_boys','BSC Young Boys','ybforever','ybfans','fussball','swisssuperleague']                  
+
+logging.info("Starting crawler")
 tweets_listener = MyStreamListener(api)
 stream = tweepy.Stream(api.auth, tweets_listener)
 stream.filter(track = yb)
