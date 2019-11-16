@@ -106,6 +106,7 @@ def create_indexes():
             "properties": {
                 "name": {"type": "text"},
                 "text": {"type": "text"},
+                "senti": {"type": "text"},
                 "datetime": {"type": "date"},
             }
         }

@@ -27,7 +27,8 @@ def tweet_to_elastic(tweet, searchterm):
     tweet_dict = {
         "name": searchterm,
         "timestamp": tweet.created_at,
-        "text": tweet.text        
+        "text": tweet.text,
+        "senti": "unknown"        
     }
     print(tweet_dict)
     es.index(index="twitter", body=tweet_dict)
