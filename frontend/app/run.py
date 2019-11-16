@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import pprint
 import logging
 import os
 import sys
@@ -8,6 +9,7 @@ import datetime
 from flask import Flask, render_template
 from elasticsearch import Elasticsearch
 
+pp = pprint.PrettyPrinter(indent=4)
 logging.basicConfig(stream=sys.stdout, level=logging.INFO,
                     format="%(asctime)s %(levelname)-5s: %(message)s")
 app = Flask(__name__)
@@ -55,43 +57,48 @@ def calcFame(array):
 
 
 def createHtmlTable(dataset):
+    sentiList = getSenti()
     htmlTable='<table class="table table-hover text-center" id="datatable-ybhack">'
     htmlTable+="""
                <thead>
                  <tr>
-                   <th>Trend</th>
+                   <th>Image</th>
                    <th>Spieler</th>
                    <th>Fame</th>
                    <th>Follower</th>
+                   <th>Likes</th>
                    <th>Posts</th>
                    <th>Tweets</th>
-                   <th>Likes</th>
                  </tr>
                </thead>
                <tbody>
                """
     for player in dataset:
-        if player["fame"] > 20000: icon = '<span class="label label-success"><i class="icon icon-upward"></i></span>'
-        elif player["fame"] > 2000: icon = '<span class="label label-warning"><i class="icon icon-forward"></i></span>'
-        else: icon = '<span class="label label-error"><i class="icon icon-downward"></i></span>'
+        sentiVal = getPlayerFromSenti(sentiList, player["name"])
+        if   sentiVal > 0: 
+            icon = '<span class="label label-success"><i class="icon icon-people"></i></span>'
+        elif sentiVal == 0: 
+            icon = '<span class="label label-warning"><i class="icon icon-people"></i></span>'
+        elif sentiVal < 0: 
+            icon = '<span class="label label-error"><i class="icon icon-people"></i></span>'
         htmlTable+="""
                    <tr>
                      <td>%s</td>
                      <td>%s</td>
                      <td><b>%s</b></td>
-                     <td><img src="static/images/twitter.png" width="20" height="20">
+                     <td><img src="static/images/insta.png" width="20" height="20">
                          <img src="static/images/facebook.png" width="20" height="20"> %s</td>
+                     <td><img src="static/images/likes.png" width="20" height="20"> %s</td>
                      <td><img src="static/images/insta.png" width="20" height="20"> %s</td>
                      <td><img src="static/images/twitter.png" width="20" height="20"> %s</td>
-                     <td><img src="static/images/likes.png" width="20" height="20"> %s</td>
                    </tr>
                    """ % (icon,
                           player["name"], 
                           player["fame"], 
                           player["follower"], 
+                          player["likes"],
                           player["posts"], 
-                          player["tweets"], 
-                          player["likes"])
+                          player["tweets"])
     htmlTable += "</tbody></table>"
     return htmlTable
 
@@ -104,7 +111,7 @@ def create_indexes():
         },
         "mappings": {
             "properties": {
-                "name": {"type": "text"},
+                "name": {"type": "text", "fields": {"keyword": {"type": "keyword"}}},
                 "text": {"type": "text"},
                 "senti": {"type": "float"},
                 "datetime": {"type": "date"},
@@ -127,6 +134,21 @@ def create_indexes():
         }
     }
     es.indices.create(index="insta", ignore=400, body=settings)
+    settings = {
+        "settings": {
+            "number_of_shards": 3,
+            "number_of_replicas": 0
+        },
+        "mappings": {
+            "properties": {
+                "name": {"type": "text", "fields": {"keyword": {"type": "keyword"}}},
+                "follower": {"type": "integer"},
+                "posts": {"type": "integer"},
+                "datetime": {"type": "date"},
+            }
+        }
+    }
+    es.indices.create(index="insta2", ignore=400, body=settings)
     settings = {
         "settings": {
             "number_of_shards": 3,
@@ -187,9 +209,30 @@ def searchPlayer(player):
     return {"tweets": int(tweets), "likes": int(likes), "follow": int(follow)}
 
 
+def getSenti():
+    body = {"size": 1, "aggs": {
+              "player_name": {
+                "terms": { "field": "name.keyword", "size": 10000 },
+                "aggs" : { "avg_senti": { "avg": { "field": "senti" } } }
+               }
+             }
+           }
+
+    res = es.search(index="twitter", body=body, size=1)
+    return res["aggregations"]["player_name"]["buckets"]
+
+
+def getPlayerFromSenti(sentiList, player):
+    for entry in sentiList:
+        if entry["key"] == player:
+            return entry["avg_senti"]["value"]
+    return 0
+
+
 def countData():
     res = es.search(index="twitter", body={"query": {"match_all": {}}})
     return res["hits"]["total"]["value"]
+
 
 if __name__ == '__main__':
     create_indexes()
