@@ -73,7 +73,7 @@ spieler_yb = ['Marco','Wölfli','David', 'vonBallmoos','Dario', 'Marzino',
            'Nicolas' ,'Bürgy','Ulisses', 'Garcia','Saidy', 'Janko','Fabian','Lustenberger',
            'Jordan', 'Lotomba','Esteban','Petignat','Marvin', 'Spielmann','Vincent', 'Sierro',
            'Miralem','Sulejmani','Gianluca', 'Gaudino','Nicolas', 'Moumi' 'Ngamaleu','Christian', 'Fassnacht',
-           'Michel', 'Aebischer','Sandro', 'Lauper','Christopher' ,'Martins','Roger' 'Assalé','Jean-Pierre', 'Nsame',
+           'Michel', 'Aebischer','Sandro', 'Lauper','Christopher' ,'Martins','Roger', 'Assalé','Jean-Pierre', 'Nsame',
            'Felix' ,'Mambimbi','Guillaume', 'Hoarau']
     
 yb = ['bsc_yb','BSC_YB','YB','Young_boys','BSC Young Boys','ybforever','ybfans','fussball','swisssuperleague']                  
