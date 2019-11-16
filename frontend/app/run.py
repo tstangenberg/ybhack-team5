@@ -187,10 +187,33 @@ def searchPlayer(player):
     return {"tweets": int(tweets), "likes": int(likes), "follow": int(follow)}
 
 
+def getSenti():
+    body = {
+   "aggs": {
+      "common-tags": {
+         "terms": {
+            "field": "name.keyword"
+         },
+         "aggs": {
+            "max-pages": {
+               "max": {
+                  "field": "senti"
+               }
+            }
+         }
+      }
+   }
+}
+    
+    res = es.search(index="twitter", body=body, size=10)
+    print(res)
+
+
 def countData():
     res = es.search(index="twitter", body={"query": {"match_all": {}}})
     return res["hits"]["total"]["value"]
 
 if __name__ == '__main__':
     create_indexes()
+    getSenti()
     app.run(debug=False, host='0.0.0.0', threaded=True, use_reloader=True)
