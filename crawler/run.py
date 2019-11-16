@@ -33,7 +33,7 @@ def tweet_to_elastic(tweet, searchterm):
         "name": searchterm,
         "timestamp": tweet.created_at,
         "text": tweet.text,
-        "senti": "unknown"        
+        "senti": 0
     }
     logging.info(str(tweet_dict))
     es.index(index="twitter", body=tweet_dict)
