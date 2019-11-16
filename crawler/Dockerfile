@@ -5,7 +5,7 @@ ENV PYTHONPATH=/
 
 RUN apk --no-cache add python3 py3-cryptography \
     && pip3 install --upgrade pip \
-    && pip3 install elasticsearch tweepy --no-cache-dir \
+    && pip3 install textblob elasticsearch tweepy --no-cache-dir \
     && adduser -D crawler
 
 COPY crawler/run.py /
