@@ -1,6 +1,11 @@
 import json
 import tweepy
 import os
+import sys
+import logging
+
+logging.basicConfig(stream=sys.stdout, level=logging.INFO,
+                    format="%(asctime)s %(levelname)-5s: %(message)s")
 
 date_since = "2019-10-16"
 player_list = ['Marco Wölfli','David von Ballmoos','Dario Marzino',
@@ -19,7 +24,7 @@ try:
                        http_auth=(username, password),
                        scheme="https", port=443)
 except Exception:
-    print("using kubernetes service connection to elastic!")
+    logging.info("using kubernetes service connection to elastic!")
     es = Elasticsearch("elasticsearch-master.efk:9200")
 
 
@@ -30,7 +35,7 @@ def tweet_to_elastic(tweet, searchterm):
         "text": tweet.text,
         "senti": "unknown"        
     }
-    print(tweet_dict)
+    logging.info(str(tweet_dict))
     es.index(index="twitter", body=tweet_dict)
 
 
@@ -46,11 +51,11 @@ class MyStreamListener(tweepy.StreamListener):
 
     def on_status(self, tweet):
             for player in player_list:
-                if player in tweet.text:
+                if player.lower() in tweet.text.lower():
                     tweet_to_elastic(tweet, player)
                 
     def on_error(self, status):
-        print("Error detected")
+        logging.error("Error detected")
 
 
 tweets_listener = MyStreamListener(api)
