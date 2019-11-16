@@ -43,6 +43,7 @@ class MyStreamListener(tweepy.StreamListener):
             self.me = api.me()
 
         def on_status(self, tweet):
+                   tmp_dict = {}
                    for anyspieler in spieler_yb:
                         if anyspieler.lower() in tweet.text.lower():
                             for activespieler in spieler:
@@ -51,10 +52,13 @@ class MyStreamListener(tweepy.StreamListener):
                                         "name": activespieler,
                                         "senti": get_tweet_sentiment(tweet.text),
                                         "datetime": tweet.created_at,
-                                        "text": tweet.text        
+                                        "text": tweet.text       
                                         }
-                                    logging.info(tweet_dict_new)
-                                    es.index(index ="twitter",body = tweet_dict_new)
+                                    if tmp_dict != tweet_dict_new:
+                                        logging.info(tweet_dict_new)
+                                        es.index(index ="twitter",body = tweet_dict_new)
+                                    tmp_dict == tweet_dict_new
+
         def on_error(self, status):
             logging.error("Error detected")
                                
