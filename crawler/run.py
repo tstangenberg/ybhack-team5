@@ -58,6 +58,7 @@ class MyStreamListener(tweepy.StreamListener):
 
         def on_error(self, status):
             logging.error("Error detected")
+            sys.exit(1)
                                
      
 spieler = ['Marco Wölfli','David von Ballmoos','Dario Marzino',
