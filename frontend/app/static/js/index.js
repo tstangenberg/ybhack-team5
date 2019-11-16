@@ -2,9 +2,9 @@ function loadDataTable(id) {
     $(document).ready(function() {
         var table = $('#' + id).DataTable( {
             //data: data,
-	    "pageLength": 15,
+            "stateSave": true,
 	    "lengthChange": false,
-            "order": [[ 5, "desc" ]],
+            "order": [[ 2, "desc" ]],
             "pageLength": 15//,
             //columns: [
             //    { title: "Spieler" },

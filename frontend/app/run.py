@@ -38,10 +38,18 @@ def healthz():
 def calcFame(array):
     dataset = []
     for player in array:
-        count = searchPlayer(player["name"])
-        fame = int((count+1) * (player["follower"]+1) * (player["posts"]+1) / 10000)
+        result = searchPlayer(player["name"])
+        # result ["tweets"]/["likes"]/["follow"] 
+        fame = int((result["tweets"]) + 
+                   (player["follower"]) + 
+                   (player["posts"]) +
+                   (result["likes"]) + 
+                   (result["follow"]))
+
+        player["follower"] = player["follower"] + result["follow"]
         player["fame"] = fame
-        player["count"] = count
+        player["tweets"] = result["tweets"]
+        player["likes"] = result["likes"]
         dataset.append(player)
     return createHtmlTable(dataset)
 
@@ -53,33 +61,37 @@ def createHtmlTable(dataset):
                  <tr>
                    <th>Trend</th>
                    <th>Spieler</th>
+                   <th>Fame</th>
                    <th>Follower</th>
                    <th>Posts</th>
                    <th>Tweets</th>
-                   <th>Fame</th>
+                   <th>Likes</th>
                  </tr>
                </thead>
                <tbody>
                """
     for player in dataset:
-        if player["fame"] > 10000: icon = '<span class="label label-success"><i class="icon icon-upward"></i></span>'
-        elif player["fame"] > 1000: icon = '<span class="label label-warning"><i class="icon icon-forward"></i></span>'
+        if player["fame"] > 20000: icon = '<span class="label label-success"><i class="icon icon-upward"></i></span>'
+        elif player["fame"] > 2000: icon = '<span class="label label-warning"><i class="icon icon-forward"></i></span>'
         else: icon = '<span class="label label-error"><i class="icon icon-downward"></i></span>'
         htmlTable+="""
                    <tr>
                      <td>%s</td>
                      <td>%s</td>
-                     <td>%s</td>
-                     <td>%s</td>
-                     <td>%s</td>
-                     <td>%s</td>
+                     <td><b>%s</b></td>
+                     <td><img src="static/images/twitter.png" width="20" height="20">
+                         <img src="static/images/facebook.png" width="20" height="20"> %s</td>
+                     <td><img src="static/images/insta.png" width="20" height="20"> %s</td>
+                     <td><img src="static/images/twitter.png" width="20" height="20"> %s</td>
+                     <td><img src="static/images/likes.png" width="20" height="20"> %s</td>
                    </tr>
                    """ % (icon,
                           player["name"], 
+                          player["fame"], 
                           player["follower"], 
                           player["posts"], 
-                          player["count"], 
-                          player["fame"])
+                          player["tweets"], 
+                          player["likes"])
     htmlTable += "</tbody></table>"
     return htmlTable
 
@@ -159,10 +171,19 @@ def searchPlayer(player):
     #es.index(index='twitter', body=e1)
 
     # search data
-    res = es.search(index="twitter", body={'query': {'match': {'name': player }}}, size=10000)
+    res = es.search(index="twitter", body={"query": {"match": {"name": player }}}, size=10000)
+    tweets = res["hits"]["total"]["value"]
+    res = es.search(index="facebook", body={"query": {"match": {"name": player }}}, size=10000)
+    try:
+        likes = res["hits"]["hits"][0]["_source"]["likes"]
+    except:
+        likes = 0
+    try:
+        follow = res["hits"]["hits"][0]["_source"]["follower"]
+    except:
+        follow = 0
 
-    count = res["hits"]["total"]["value"]
-    return count
+    return {"tweets": int(tweets), "likes": int(likes), "follow": int(follow)}
 
 
 def countData():
