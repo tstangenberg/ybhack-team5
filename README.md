@@ -3,6 +3,8 @@
 # frontend
 contains the frontend build in python with the power of flask
 
-# collector
+# crawler
+live tweet data stream for elasticsearch 
 
-# anaylzer
+# scraper
+Java based Insta scraper for base dataset
